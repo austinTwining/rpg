@@ -2,7 +2,7 @@ package ca.twining.rpg.game.entity.mob;
 
 import ca.twining.rpg.game.Screen;
 import ca.twining.rpg.game.entity.Entity;
-import ca.twining.rpg.game.level.tile.Tile;
+import ca.twining.rpg.game.input.Mouse;
 
 public abstract class Mob extends Entity{
 	
@@ -37,8 +37,8 @@ public abstract class Mob extends Entity{
 	}
 	
 	protected void shoot(int x, int y, double dir){
-		dir = dir * 180 / Math.PI;
-		System.out.println(dir);
+		dir = Math.toDegrees(dir);
+		//System.out.println(dir);
 	}
 	
 	private boolean collision(int xa, int ya){

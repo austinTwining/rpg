@@ -181,6 +181,7 @@ public class Game extends Canvas implements Runnable{
 			
 			//draw HUD
 			screen.drawHUD(Image.HUD);
+			screen.drawMiniMap(267, 73, 50, 42, level, player);
 			screen.drawHealthHUD(xScroll + 1, yScroll + 1, player, Sprite.fullHeart, Sprite.halfHeart);
 			screen.drawArmourHUD(xScroll + 1, yScroll + 9, player, Sprite.fullShield, Sprite.halfShield);
 		}
@@ -194,10 +195,10 @@ public class Game extends Canvas implements Runnable{
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		if(Mouse.getButton() == 1){
 			g.setColor(Color.CYAN);
+			g.drawLine(((player.x - Screen.xOffset) + 8) * SCALE, ((player.y - Screen.yOffset) + 8) * SCALE, Mouse.getX(), Mouse.getY());
 		}else{
 			g.setColor(Color.BLACK);
 		}
-		g.fillRect(Mouse.getX() - 16, Mouse.getY() - 16, 32, 32);
 		g.dispose();
 		bs.show();
 	}

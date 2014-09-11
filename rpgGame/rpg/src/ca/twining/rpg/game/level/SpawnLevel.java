@@ -17,7 +17,7 @@ public class SpawnLevel extends Level {
 		super(path);
 		entities = new ArrayList<Entity>();
 		
-		for(int i = 1; i <= 1; i++){
+		for(int i = 1; i <= 10; i++){
 			Entity tempEntity = new PirateEnemy(i * 30, i * 30);
 			tempEntity.level = this;
 			

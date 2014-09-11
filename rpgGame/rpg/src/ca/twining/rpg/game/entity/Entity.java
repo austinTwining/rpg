@@ -8,8 +8,8 @@ import ca.twining.rpg.game.level.Level;
 
 public abstract class Entity {
 	
-	public int x;
-	public int y;
+	public  int x;
+	public  int y;
 	private boolean removed = false;
 	
 	

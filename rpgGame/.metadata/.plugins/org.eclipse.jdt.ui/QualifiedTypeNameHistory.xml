@@ -4,8 +4,9 @@
 <fullyQualifiedTypeName name="ca.twining.rpg.game.level.tile.Tile"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.level.tile.RedBrickWallTile"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.graphics.Sprite"/>
-<fullyQualifiedTypeName name="ca.twining.rpg.game.Game"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.input.Mouse"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.Game"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.level.Level"/>
 </qualifiedTypeNameHistroy>
