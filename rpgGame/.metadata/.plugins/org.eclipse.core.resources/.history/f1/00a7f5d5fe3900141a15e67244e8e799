@@ -1,0 +1,5 @@
+package ca.twining.rpg.game.entity.projectile;
+
+public class FireProjectile {
+
+}

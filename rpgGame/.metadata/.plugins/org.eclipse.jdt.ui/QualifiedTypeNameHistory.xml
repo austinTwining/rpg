@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.level.tile.Tile"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.level.tile.RedBrickWallTile"/>
-<fullyQualifiedTypeName name="ca.twining.rpg.game.graphics.Sprite"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.input.Mouse"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.Game"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.level.Level"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.entity.Entity"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.graphics.Sprite"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.entity.projectile.FireProjectile"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.entity.projectile.Projectile"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.Screen"/>
 </qualifiedTypeNameHistroy>

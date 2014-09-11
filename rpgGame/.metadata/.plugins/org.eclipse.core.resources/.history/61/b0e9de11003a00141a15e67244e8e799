@@ -1,0 +1,10 @@
+package ca.twining.rpg.game.entity.projectile;
+
+public class FireProjectile extends Projectile{
+
+	public FireProjectile(int x, int y, int dir) {
+		super(x, y, dir);
+		range = 300;
+	}
+
+}

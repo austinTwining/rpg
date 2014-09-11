@@ -32,8 +32,8 @@ public class Screen {
 	public void drawMiniMap(int xp, int yp, int w, int h, Level level, Player player){
 		for(int y = yp; y < (yp + h); y++){
 			for(int x = xp; x < (xp + w); x++){
-				Tile tile = level.getTile(((player.x - x) / 16), (((player.y - y) / 16)));
-				System.out.println(player.x);
+				Tile tile = level.getTile((((player.x - (w * 16)) + (x))), -((player.y - (h * 16) + (y))));
+				System.out.println();
 				if(tile == Tile.voidTile) pixels[x + y * width] = 0xff000000;
 				else if(tile == Tile.grassTile)pixels[x + y * width] = 0xff007f0e;
 				else if(tile == Tile.rockTile)pixels[x + y * width] = 0xff4c4c4c;

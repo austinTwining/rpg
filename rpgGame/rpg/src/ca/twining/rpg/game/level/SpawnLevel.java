@@ -2,7 +2,6 @@ package ca.twining.rpg.game.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -15,7 +14,6 @@ public class SpawnLevel extends Level {
 	
 	public SpawnLevel(String path){
 		super(path);
-		entities = new ArrayList<Entity>();
 		
 		for(int i = 1; i <= 10; i++){
 			Entity tempEntity = new PirateEnemy(i * 30, i * 30);
@@ -26,9 +24,6 @@ public class SpawnLevel extends Level {
 	}
 	
 	public void update(){
-		for(int i = 0; i < entities.size(); i++){
-			entities.get(i).update();
-		}
 	}
 	
 	// grass = 0x007F0E

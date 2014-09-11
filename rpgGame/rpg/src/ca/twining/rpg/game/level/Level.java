@@ -11,7 +11,7 @@ public abstract class Level {
 	public int width;
 	public int height;
 	
-	public ArrayList<Entity> entities;
+	public ArrayList<Entity>	entities = new ArrayList<Entity>();
 	
 	public int[] tiles;
 	
@@ -35,6 +35,9 @@ public abstract class Level {
 	}
 	
 	public void update(){
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).update();
+		}
 	}
 	
 	@SuppressWarnings("unused")
@@ -79,6 +82,9 @@ public abstract class Level {
 					continue;
 				}
 			}
+		}
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).draw(screen);
 		}
 	}
 
