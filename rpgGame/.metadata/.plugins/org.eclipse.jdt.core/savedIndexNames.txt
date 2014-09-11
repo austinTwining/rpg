@@ -1,0 +1,3 @@
+INDEX VERSION 1.126+J:\rpgGame\.metadata\.plugins\org.eclipse.jdt.core
+184770101.index
+2427811707.index

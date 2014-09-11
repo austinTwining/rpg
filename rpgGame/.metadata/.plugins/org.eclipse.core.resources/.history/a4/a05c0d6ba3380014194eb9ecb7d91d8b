@@ -1,0 +1,5 @@
+package ca.twining.rpg.game.level.tile;
+
+public enum TileId {
+
+}

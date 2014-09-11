@@ -1,0 +1,5 @@
+package ca.twining.rpg.game.graphics;
+
+public class Image {
+
+}

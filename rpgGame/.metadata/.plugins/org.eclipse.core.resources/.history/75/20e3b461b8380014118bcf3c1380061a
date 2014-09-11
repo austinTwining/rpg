@@ -1,0 +1,216 @@
+package ca.twining.rpg.game;
+
+import java.awt.BorderLayout;
+import java.awt.Canvas;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
+import javax.swing.JFrame;
+
+import ca.twining.rpg.game.entity.Entity;
+import ca.twining.rpg.game.entity.mob.Player;
+import ca.twining.rpg.game.graphics.Sprite;
+import ca.twining.rpg.game.input.Keyboard;
+import ca.twining.rpg.game.input.Mouse;
+import ca.twining.rpg.game.level.Level;
+import ca.twining.rpg.game.level.SpawnLevel;
+
+public class Game extends Canvas implements Runnable{
+	private static final long serialVersionUID = 1L;
+	
+	//global game window variables
+	public static final int WIDTH = 320;
+	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static final int SCALE = 3;
+	public static final String TITLE = "A Pimpin Ass RPG";
+	
+	private static final double MAXUPDATES = 60D; 
+	
+	private Thread thread;
+	
+	private JFrame frame;
+	private Keyboard key;
+	private Mouse mouse;
+	
+	private Screen screen;
+	
+	private BufferedImage image;
+	private int[] pixels;
+	
+	//levels
+	private Level level;
+	
+	private Player player;
+	
+	public boolean running = false;
+	public boolean inGame = false;
+	
+	public Game(){
+		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		
+		//initialize screen
+		screen = new Screen(WIDTH, HEIGHT);
+		
+		//frame set up
+		frame = new JFrame(TITLE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		frame.add(this, BorderLayout.CENTER);
+		frame.pack();
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		frame.requestFocus();
+		
+		//setup key input
+		key = new Keyboard();
+		mouse = new Mouse();
+		frame.addMouseListener(mouse);
+		frame.addKeyListener(key);
+		
+		//initialize level
+		//level = new RandomLevel(500, 500);
+		level = new SpawnLevel("/levels/SpawnLevel.png");
+		
+		player = new Player(32 << 4, 16 << 4, key);
+		player.init(level);
+		
+		//image
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	}
+	
+	public synchronized void start(){
+		running = true;
+		if(thread == null){
+			thread = new Thread(this, "game");
+			thread.start();
+		}
+	}
+	
+	public synchronized void stop(){
+		running = false;
+	}
+
+	@Override
+	public void run() {
+		init();
+		
+		long lastTime = System.nanoTime();
+		double nsPerUpdate = 1000000000D / MAXUPDATES;
+		
+		int frames = 0;
+		int updates = 0;
+		
+		long lastTimer = System.currentTimeMillis();
+		double delta = 0;
+		
+		while(running){
+			long now = System.nanoTime();
+			delta += (now - lastTime) / nsPerUpdate;
+			lastTime = now;
+			
+			while(delta >= 1){
+				updates++;
+				update();
+				delta -= 1;
+			}
+			
+			frames++;
+			draw();
+			
+			if(System.currentTimeMillis() - lastTimer >= 1000){
+				lastTimer += 1000;
+				frame.setTitle(TITLE + "   " + frames + " | " + updates );
+				frames = 0;
+				updates = 0;
+			}
+		}
+	}
+	
+	public void init(){
+	}
+	
+	public void update(){
+		key.update();
+		player.update();
+		level.update();
+		checkCollision();
+		//System.out.println(" " + level.entities.size());
+	}
+	
+	public void draw(){
+		BufferStrategy bs = getBufferStrategy();
+		if(bs == null){
+			createBufferStrategy(3);
+			return;
+		}
+		
+		screen.clear();
+		int xScroll = player.x - (screen.width / 2) + 8;
+		int yScroll = player.y - (screen.height / 2) - 8;
+		
+		if(xScroll < 16) xScroll = 16;
+		if(yScroll < 16) yScroll = 16;
+		if(xScroll > (level.width*8) + (level.width *  4)) xScroll = (level.width*8) + (level.width *  4);
+		if (yScroll > (level.height*8)) yScroll = (level.height*8); 
+		
+		//draw level
+		level.draw(xScroll, yScroll, screen);
+		
+		//draw entities
+		for(int j = 0; j < level.entities.size(); j++){
+			level.entities.get(j).draw(screen);
+		}
+		
+		//draw player
+		player.draw(screen);
+		
+		//draw HUD
+		screen.drawHealthHUD(xScroll + 1, yScroll + 1, player, Sprite.fullHeart, Sprite.halfHeart);
+		screen.drawArmourHUD(xScroll + 1, yScroll + 9, player, Sprite.fullShield, Sprite.halfShield);
+
+		
+		for(int i = 0; i < pixels.length; i++){
+			pixels[i] = screen.pixels[i];
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		
+		g.dispose();
+		bs.show();
+	}
+	
+	public void checkCollision(){
+		//collision for player
+		for(int j = 0; j < level.entities.size(); j++){
+			if(player.collisionBounds().intersects(level.entities.get(j).collisionBounds())){
+				player.onCollisionEntity(level.entities.get(j), level);
+			}
+		}
+		
+		//collision for entities
+		for(int k = 0; k < level.entities.size(); k++){
+			if(!level.entities.get(k).collisionBounds().isEmpty()){
+				Entity tempEntity = level.entities.get(k);
+				for(int f = 0; f < level.entities.size(); f++){
+					if(tempEntity.collisionBounds().intersects(level.entities.get(f).collisionBounds())){
+						tempEntity.onCollisionEntity(tempEntity, level);
+					}
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args){
+		new Game().start();
+	}
+
+}

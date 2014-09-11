@@ -1,0 +1,38 @@
+package ca.twining.rpg.game.entity.mob;
+
+import ca.twining.rpg.game.Screen;
+import ca.twining.rpg.game.entity.Entity;
+
+public abstract class Mob extends Entity{
+	
+	protected int direction = 2;
+	protected boolean moving = false;
+	protected boolean walking = false;
+	
+	public int health;
+	
+	public void move(int xa, int ya){
+		if(xa > 0) direction = 1;
+		if(xa < 0) direction = 3;
+		if(ya > 0) direction = 2;
+		if(ya < 0) direction = 0;
+		
+		if(!collision(xa, ya)){
+			x += xa;
+			y += ya;
+		}
+	}
+	
+	public void update(){
+	}
+	
+	public void draw(Screen screen){
+	}
+	
+	private boolean collision(int xa, int ya){
+		boolean solid = false;
+		if(level.getTile((x+xa) * 16, (y+ya) * 16).solid()) solid = true;
+		return solid;
+	}
+
+}

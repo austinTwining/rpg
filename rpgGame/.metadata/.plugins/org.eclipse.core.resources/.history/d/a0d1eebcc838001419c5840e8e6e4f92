@@ -1,0 +1,10 @@
+package ca.twining.rpg.game.level.tile;
+
+public enum TileId {
+	Rock,
+	Lava,
+	Sand,
+	LongGrass,
+	Grass,
+	Dirt
+}

@@ -1,0 +1,11 @@
+package ca.twining.rpg.game.level.tile;
+
+import ca.twining.rpg.game.graphics.Sprite;
+
+public class RedBrickWallTile extends Tile{
+
+	public RedBrickWallTile(Sprite sprite) {
+		super(sprite);
+	}
+
+}
