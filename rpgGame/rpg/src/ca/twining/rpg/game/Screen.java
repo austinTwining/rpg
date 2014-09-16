@@ -32,17 +32,14 @@ public class Screen {
 	public void drawMiniMap(int xp, int yp, int w, int h, Level level, Player player){
 		for(int y = yp; y < (yp + h); y++){
 			for(int x = xp; x < (xp + w); x++){
-				Tile tile = level.getTile((((player.x - (w * 16)) + (x))), -((player.y - (h * 16) + (y))));
-				System.out.println();
-				if(tile == Tile.voidTile) pixels[x + y * width] = 0xff000000;
-				else if(tile == Tile.grassTile)pixels[x + y * width] = 0xff007f0e;
-				else if(tile == Tile.rockTile)pixels[x + y * width] = 0xff4c4c4c;
-				else if(tile == Tile.longGrassTile)pixels[x + y * width] = 0xff8cff99;
-				else if(tile == Tile.dirtTile)pixels[x + y * width] = 0xff695200;
-				else if(tile == Tile.sandTile)pixels[x + y * width] = 0xffffefa3;
-				else if(tile == Tile.lavaTile)pixels[x + y * width] = 0xffff8426;
-				else if(tile == Tile.redBrickWallTile)pixels[x + y * width] = 0xffff2014;
-				else if(tile == Tile.blackBrickWallTile)pixels[x + y * width] = 0xff111111;
+				if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 0)pixels[x + y * width] = 0xff007f0e;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 1)pixels[x + y * width] = 0xff4c4c4c;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 2)pixels[x + y * width] = 0xff8cff99;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 3)pixels[x + y * width] = 0xff695200;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 4)pixels[x + y * width] = 0xffffefa3;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 5)pixels[x + y * width] = 0xffff8426;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 6)pixels[x + y * width] = 0xffff2014;
+				else if(level.tiles[(x - (xp))+(y - (yp)) * level.width] == 7)pixels[x + y * width] = 0xff111111;
 				else pixels[x + y * width] = 0xffff00ff;
 			}
 		}
@@ -246,6 +243,7 @@ public class Screen {
 		}
 	}
 
+	@SuppressWarnings("static-access")
 	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

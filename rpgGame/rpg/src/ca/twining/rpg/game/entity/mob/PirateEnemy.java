@@ -1,5 +1,7 @@
 package ca.twining.rpg.game.entity.mob;
 
+import java.util.Random;
+
 import ca.twining.rpg.game.Screen;
 import ca.twining.rpg.game.entity.EntityId;
 import ca.twining.rpg.game.graphics.Sprite;
@@ -9,10 +11,10 @@ public class PirateEnemy extends Mob{
 	private int animation = 0;
 	private boolean walking = false;
 	
-	private boolean isMovingForward = false;
-	private boolean isMovingBackward = false;
-	private boolean isMovingLeft = false;
-	private boolean isMovingRight = false;
+	private Random random = new Random();
+	
+	private int time = 0;
+	private int xa = 1, ya = 0;
 	
 	public PirateEnemy(int x, int y){
 		this.x = x;
@@ -23,19 +25,19 @@ public class PirateEnemy extends Mob{
 	}
 	
 	public void update(){
-		int xa = 0, ya = 0;
+		time++;
 		if(animation < 1000) animation++;
 		else animation = 0;
 		
 		//AI code goes here//
-		if(isMovingForward){
-			ya--;
-		}else if(isMovingBackward){
-			ya++;
-		}else if(isMovingLeft){
-			xa--;
-		}else if(isMovingRight){
-			xa++;
+		if(time % (random.nextInt(50) + 30) == 0){
+			xa = random.nextInt(3) - 1;
+			ya = random.nextInt(3) - 1;
+			
+			if(random.nextInt(3) == 0){
+				xa = 0;
+				ya = 0;
+			}
 		}
 		/////////////////////
 		
@@ -53,9 +55,9 @@ public class PirateEnemy extends Mob{
 			sprite = Sprite.pirate_enemy_back_standing;
 			if(walking){
 				if(animation % 20 > 10){
-					//sprite = Sprite.player_back_walking1;
+					sprite = Sprite.player_back_walking1;
 				}else{
-					//sprite = Sprite.player_back_walking2;
+					sprite = Sprite.player_back_walking2;
 				}
 			}
 		}
@@ -63,9 +65,9 @@ public class PirateEnemy extends Mob{
 			sprite = Sprite.pirate_enemy_side_standing;
 			if(walking){
 				if(animation % 20 > 10){
-					//sprite = Sprite.player_side_walking1;
+					sprite = Sprite.player_side_walking1;
 				}else{
-					//sprite = Sprite.player_side_walking2;
+					sprite = Sprite.player_side_walking2;
 				}
 			}
 		}
@@ -73,9 +75,9 @@ public class PirateEnemy extends Mob{
 			sprite = Sprite.pirate_enemy_forward_standing;
 			if(walking){
 				if(animation % 20 > 10){
-					//sprite = Sprite.player_forward_walking1;
+					sprite = Sprite.player_forward_walking1;
 				}else{
-					//sprite = Sprite.player_forward_walking2;
+					sprite = Sprite.player_forward_walking2;
 				}
 			}
 		}
@@ -84,9 +86,9 @@ public class PirateEnemy extends Mob{
 			sprite = Sprite.pirate_enemy_side_standing;
 			if(walking){
 				if(animation % 20 > 10){
-					//sprite = Sprite.player_side_walking1;
+					sprite = Sprite.player_side_walking1;
 				}else{
-					//sprite = Sprite.player_side_walking2;
+					sprite = Sprite.player_side_walking2;
 				}
 			}
 		}

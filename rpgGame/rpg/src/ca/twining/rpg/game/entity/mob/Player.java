@@ -76,6 +76,7 @@ public class Player extends Mob{
 		
 		//shooting
 		if(Mouse.getButton() == 1){
+			@SuppressWarnings("unused")
 			double angle = Math.atan2((double)Mouse.getY() - ((y - Screen.yOffset) + 8) * Game.SCALE, (double)Math.abs(Mouse.getX()) - ((x - Screen.xOffset) + 8) * Game.SCALE);
 			//shoot(x, y, angle);
 		}
@@ -123,8 +124,6 @@ public class Player extends Mob{
 	
 	public void onCollisionEntity(Entity entity, Level level){
 		if(entity.getId() == EntityId.Pirate){
-			level.removeEntity(entity);
-			this.health -= 1;
 		}
 	}
 	

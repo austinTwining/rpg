@@ -13,4 +13,6 @@
 <fullyQualifiedTypeName name="ca.twining.rpg.game.entity.projectile.FireProjectile"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.entity.projectile.Projectile"/>
 <fullyQualifiedTypeName name="ca.twining.rpg.game.Screen"/>
+<fullyQualifiedTypeName name="ca.twining.rpg.game.graphics.Image"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

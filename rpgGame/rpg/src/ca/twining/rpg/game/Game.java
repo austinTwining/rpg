@@ -21,6 +21,7 @@ import ca.twining.rpg.game.level.Level;
 import ca.twining.rpg.game.level.RandomLevel;
 import ca.twining.rpg.game.level.SpawnLevel;
 
+@SuppressWarnings("unused")
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
 	
@@ -181,7 +182,7 @@ public class Game extends Canvas implements Runnable{
 			
 			//draw HUD
 			screen.drawHUD(Image.HUD);
-			screen.drawMiniMap(267, 73, 50, 41, level, player);
+			//screen.drawMiniMap(267, 73, 50, 41, level, player);
 			screen.drawHealthHUD(xScroll + 1, yScroll + 1, player, Sprite.fullHeart, Sprite.halfHeart);
 			screen.drawArmourHUD(xScroll + 1, yScroll + 9, player, Sprite.fullShield, Sprite.halfShield);
 		}

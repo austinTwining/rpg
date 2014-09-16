@@ -4,7 +4,6 @@ import ca.twining.rpg.game.Screen;
 import ca.twining.rpg.game.entity.Entity;
 import ca.twining.rpg.game.entity.projectile.FireProjectile;
 import ca.twining.rpg.game.entity.projectile.Projectile;
-import ca.twining.rpg.game.input.Mouse;
 
 public abstract class Mob extends Entity{
 	
@@ -49,6 +48,7 @@ public abstract class Mob extends Entity{
 			int xt = ((x+xa) + c % 2 * 8 + 4) / 16;
 			int yt = ((y+ya) + c / 2 * 16 + 1) / 16;
 			if(level.getTile(xt, yt).solid()) solid = true;
+			if(xt > (level.width*16) || xt < 1 || yt > (level.height * 16) || yt < 1) solid = true;
 		}
 		return solid;
 	}

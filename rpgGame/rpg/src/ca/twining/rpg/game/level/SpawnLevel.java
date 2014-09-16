@@ -15,8 +15,8 @@ public class SpawnLevel extends Level {
 	public SpawnLevel(String path){
 		super(path);
 		
-		for(int i = 1; i <= 10; i++){
-			Entity tempEntity = new PirateEnemy(i * 30, i * 30);
+		for(int i = 1; i <= 1; i++){
+			Entity tempEntity = new PirateEnemy(32 << 4, 8 << 4);
 			tempEntity.level = this;
 			
 			spawnEntity(tempEntity);
@@ -24,6 +24,9 @@ public class SpawnLevel extends Level {
 	}
 	
 	public void update(){
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).update();
+		}
 	}
 	
 	// grass = 0x007F0E
